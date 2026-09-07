@@ -9,10 +9,11 @@ import Image from "next/image";
 // sample links for the navbar, you can replace them with your own links
 const nav_links: { name: string; href: string }[] = [
     {name: "Home", href: "/"},
-    {name: "About", href: "#"},
-    {name: "Schedule", href: "#"},
-    {name: "Speakers", href: "#"},
-    {name: "FAQ", href: "#"},
+    {name: "About", href: "#about"},
+    {name: "Schedule", href: "#schedule"},
+    {name: "Checklist", href: "#checklist"},
+    {name: "FAQ", href: "#faq"},
+    {name: "Venue", href: "#venue"},
 ];
 
 export default function Navbar() {
@@ -21,26 +22,31 @@ export default function Navbar() {
         <nav className={"fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 "}>
             <SectionContainer>
                 <div className={"flex items-center justify-between h-16 w-full"}>
+                    <Link href={"/"}>
                     <div className={"flex items-center gap-2"}>
+
                         {/*Logo*/}
                         <Image
                             height={40}
                             width={40}
                             alt="Qiskit Brand Logo"
-                            src="/Qiskit_SVG/qiskit_purple-60.svg"
+                            src="/brand/qiskit_purple-60.svg"
                         />
                             <div className={"text-2xl font-bold "}>
                                 X
                             </div>
                         <Image
-                            height={40}
-                            width={40}
+                            width={120}
+                            height={99}
+                            className="w-10 h-auto"
                             alt="Qiskit Brand Logo"
                             src="/qquest_logo.png"
                         />
                         {/*Title*/}
                         <h3 className={"text-xl font-bold"}>Qiskit Fall Fest 2026</h3>
+
                     </div>
+                    </Link>
                     <div className={"hidden md:flex items-center gap-5"}>
                         {/* links */}
                         <ul className={"flex items-center gap-2"}>

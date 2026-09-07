@@ -4,6 +4,31 @@ Append-only. **Newest entry at the top.** Every entry names the milestone, the t
 
 ---
 
+## 2026-09-07 — Decade timeline & Myths interactive section built (session 4)
+
+**Milestone:** M1
+**Tasks:** `M1-CONTENT-01`, `M1-CONTENT-02`, `M1-UI-01`, `M1-UI-02`
+**Model/tool:** Antigravity
+
+**Done:**
+- Created `qff_2026/content/decade.ts` with 11 sourced entries (2016–2026) comparing claimed vs achieved with verified metrics, concluding with QFF 2026 at MIT-ADT.
+- Created `qff_2026/content/myths.ts` with 4 sourced claim/reality pairs covering superposition/interference, RSA factoring physical qubit requirements, BQP vs classical 5 GHz clocks, and NISQ error mitigation. Zero banned adjectives.
+- Built `components/sections/Decade.tsx` (Section 03) featuring interactive year filtering, responsive card comparisons, milestone spine, and `SectionContainer` consistency.
+- Built `components/sections/Myths.tsx` (Section 04) featuring real two-stage quantum measurement interaction with character/bit scrambling animation resolving into reality corrections, highlighted with `MAGENTA_40` / pink accents, guarded by `prefers-reduced-motion`.
+- Added required verbatim IBM attribution line to `components/sections/Footer.tsx` per `CONTRACT.md`.
+- Integrated Section 03 (`Decade`) and Section 04 (`Myths`) into `app/page.tsx`.
+- Verified clean build (`npm run build`) with zero TypeScript errors and successful static export.
+
+**Not finished:**
+- Remaining landing page sections (Schedule, Speakers, FAQ, Pre-event checklist) not yet wired.
+
+**Noticed but not fixed:**
+- Project Next.js root is in `qff_2026/` subdirectory while repo root contains specs and git config.
+
+**Next action:** `M1-CONTENT-03` / `M1-UI-03` — Sessions section (Part 1 and Part 2 cards).
+
+---
+
 ## 2026-09-05 — Mockup agreed, specs reconciled (session 3)
 
 **Milestone:** pre-M0
@@ -81,3 +106,19 @@ Append-only. **Newest entry at the top.** Every entry names the milestone, the t
 
 **Next action:** <specific task ID>
 ```
+
+## 2026-09-07 - Task C: Practical Info (Completed)
+Built and wired the FAQ, Checklist, Schedule, and Venue sections. Intervened to integrate \shadcn/ui\ Accordion for FAQ and a live Countdown timer per user request. Modified CTAs across Hero and Navbar to route to an interim \/register\ page which links to the placeholder Google Form. Verified zero errors and zero warnings on build.
+
+
+## 2026-09-07 - Task C: Reverts
+Per user request, reverted the live Countdown timer and the Registration page stub updates, leaving them as static stubs for another team member's tasks.
+
+
+## 2026-09-07 - Task C: Reverts Reverted
+Per user request, brought back the live Countdown timer and the Registration page stub updates.
+
+
+## 2026-09-07 - Task C: Rewind
+Executed /rewind per user request to definitively restore the static countdown and original Registration page stub.
+

@@ -32,6 +32,8 @@ First because IBM needs a URL and because a project that cannot ship on day one 
 
 **Risk:** submitting a preview URL by copying it from the browser during a test deploy. One community in this cohort submitted a localhost address and another a branch-preview URL; both are permanently broken on IBM's page. Read INV-7 before submitting anything.
 
+**Sequencing correction, recorded 6 September:** M0-OPS-01 (connect the Cloudflare Pages project to the repo) does not need to wait for M1 content to finish. Connect it now, against whatever is on `main` today. Every push to `main` deploys to production automatically; every PR gets its own preview URL. This means M1 work becomes visible and reviewable as it lands, instead of arriving as one big reveal at the end — and it decouples "the site is live" from "the site is content-complete," which were wrongly treated as the same milestone.
+
 ---
 
 ## M1 — The site says something true ⏱ 2.5 weeks · target 25 September
@@ -60,6 +62,8 @@ The content milestone. This is where the project either differentiates or become
 - [ ] Lead has reviewed and approved every content module as a story, not a task
 
 **Risk:** the myths and decade sections get deferred because they are writing rather than coding, and the site ships as a schedule with a hero. If those two sections are cut, the project has no differentiator and M1 has not actually closed.
+
+**Revised close condition, recorded 6 September:** M1 closing no longer means "content complete, registration still fake." It means content complete **and** the Register CTA points somewhere real — a standing Google Form (see M1-OPS-04) if the real backend (M2) isn't ready yet. A finished-looking site with a dead register button is worse than an honest interim link, because a visitor has no way to tell it's temporary.
 
 ---
 
