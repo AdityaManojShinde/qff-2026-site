@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     // ... add more keywords for SEO optimization
   ],
 
-  authors: [{ name: "MIT ADT University Qiskit Fall Fest Team" }],
+  authors: [{ name: "MIT ADT University's Qquest Technical Team" }],
   creator: "MIT ADT University",
   publisher: "MIT ADT University",
 
