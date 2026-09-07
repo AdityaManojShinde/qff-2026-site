@@ -18,72 +18,74 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL( process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"), // required for resolving image URLs
+
   title: "Qiskit Fall Fest 2026 | MIT ADT University, Pune",
   description: "Qiskit Fall Fest 2026 is a college festival celebrating technology, creativity, innovation, and campus culture with exciting events, competitions, and activities for students.",
-  icons: {
-    icon: "./favicon.svg",
-    apple: "./favicon.svg",
+
+  alternates: {
+    canonical: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   },
+
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+
   keywords: [
-    "Qiskit Fall Fest 2026",
     "Qiskit Fall Fest 2026",
     "Qiskit Fest",
     "Qiskit 2026",
-    "Qiskit fest Pune",
-    "Qiskit MIT ADT",
-    "mit adt qiskit fall fest",
-    "pune qiskit fall fest",
-    "student festival",
-    "technical fest 2026",
-    "tech fest Pune",
-    "annual college fest",
-    "inter college fest 2026",
-    "college tech event",
-    "college fest Pune",
-    "tech fest Pune 2026",
-    "MIT ADT University fest",
-    "fest in Pune September 2026",
-    "student events Pune",
-    "engineering college fest Maharashtra",
-    "quantum computing fest",
-    "Qiskit workshop",
-    "quantum computing hackathon",
-    "quantum computing college event",
-    "AI ML fest 2026",
-    "coding fest Pune",
-    "hackathon 2026 Pune",
-    "hackathon registration 2026",
-    "tech workshops for students",
-    "coding competition 2026",
-    "guest lecture tech fest",
-    "paper presentation competition",
-    "gaming and esports fest",
-    "best college fest to attend 2026",
-    "upcoming tech fest near me",
-    "how to register for Qiskit fest",
-    "college fest events list 2026",
-    "student tech competitions India",
-    "quantum computing events for students India",
-    "Qiskit fest registration",
-    "register for Qiskit Fall Fest",
-    "Qiskit fest tickets",
-    "Qiskit fest schedule",
-    "Qiskit fest 2026 date"
+    "MIT ADT University, Pune Qiskit Fall Fest",
+    "Quantum Computing Festival",
+    "Qiskit Community",
+    "qiskit fall fest 2026 pune",
+    "qiskit fall fest 2026 india",
+    "qiskit fall fest 2026 event",
+    "qiskit fall fest 2026 registration",
+    "qiskit fall fest 2026 schedule",
+    "qiskit fall fest 2026 speakers",
+    // ... add more keywords for SEO optimization
   ],
+
+  authors: [{ name: "MIT ADT University Qiskit Fall Fest Team" }],
+  creator: "MIT ADT University",
+  publisher: "MIT ADT University",
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
+
   openGraph: {
     title: "Qiskit Fall Fest 2026",
     description: "MIT ADT University's flagship quantum computing festival powered by IBM Qiskit.",
     siteName: "Qiskit Fall Fest 2026",
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    type: "website",
+    locale: "en_IN",
     images: [
       {
         url: "/banner/banner.png",
         width: 1200,
         height: 630,
         alt: "Qiskit Fall Fest 2026 Banner",
-        type: "website",
-      }
-    ]
-  }
+        type: "image/png",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Qiskit Fall Fest 2026",
+    description: "MIT ADT University's flagship quantum computing festival powered by IBM Qiskit.",
+    images: ["/banner/banner.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
