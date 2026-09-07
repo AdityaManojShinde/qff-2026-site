@@ -30,7 +30,7 @@ export default function Hero() {
                             </h1>
 
                             <p className="text-base sm:text-lg lg:text-xl mt-4 sm:mt-5 text-purple-300 leading-relaxed">
-                                <span className="text-destructive">
+                                <span className="text-destructive font-bold">
                                     3 November 2026
                                 </span>{" "}
                                 MIT Art, Design and Technology University, Pune
@@ -98,7 +98,7 @@ export default function Hero() {
                                 height={300}
                                 width={300}
                                 alt="Qskit Brand Logo"
-                                src="/globe.svg"
+                                src="/Qiskit_SVG/qiskit_white.svg"
                                 className="w-48 sm:w-60 md:w-72 lg:w-75 h-auto"
                             />
                         </div>

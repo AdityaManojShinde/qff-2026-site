@@ -6,7 +6,7 @@ import SectionContainer from "@/components/common/SectionContainer";
 * */
 export default function Footer() {
     return (
-        <footer className="bg-slate-900 text-white">
+        <footer className="bg-foreground text-white">
             <SectionContainer>
                 <div className={"flex flex-col items-center justify-center py-6"}>
                     <h3 className={"text-lg font-semibold"}>Qiskit Fall Fest 2026</h3>

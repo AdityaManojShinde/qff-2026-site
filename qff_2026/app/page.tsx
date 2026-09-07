@@ -1,4 +1,5 @@
 import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
 
 {/* add sections here, every section component should have a SectionContainer wrapper for consistent spacing and alignment */}
 
@@ -13,6 +14,7 @@ export default function Home() {
     <div>
         {/*Add Sections Here*/}
         <Hero/>
+        <About/>
     </div>
   );
 }

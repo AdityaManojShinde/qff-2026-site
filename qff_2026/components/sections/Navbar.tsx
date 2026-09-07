@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {ArrowRight, MenuIcon} from "lucide-react";
 import React from "react";
+import Image from "next/image";
 
 // sample links for the navbar, you can replace them with your own links
 const nav_links: { name: string; href: string }[] = [
@@ -22,6 +23,21 @@ export default function Navbar() {
                 <div className={"flex items-center justify-between h-16 w-full"}>
                     <div className={"flex items-center gap-2"}>
                         {/*Logo*/}
+                        <Image
+                            height={40}
+                            width={40}
+                            alt="Qiskit Brand Logo"
+                            src="/Qiskit_SVG/qiskit_purple-60.svg"
+                        />
+                            <div className={"text-2xl font-bold "}>
+                                X
+                            </div>
+                        <Image
+                            height={40}
+                            width={40}
+                            alt="Qiskit Brand Logo"
+                            src="/qquest_logo.png"
+                        />
                         {/*Title*/}
                         <h3 className={"text-xl font-bold"}>Qiskit Fall Fest 2026</h3>
                     </div>
