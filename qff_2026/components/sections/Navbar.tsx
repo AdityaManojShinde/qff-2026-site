@@ -37,7 +37,7 @@ export default function Navbar() {
                             }
                         </ul>
                         {/*CTA Btn*/}
-                        <Button>
+                        <Button className={"rounded-none"}>
                             Register <ArrowRight />
                         </Button>
                     </div>
