@@ -98,7 +98,7 @@ export default function Hero() {
                                 height={300}
                                 width={300}
                                 alt="Qskit Brand Logo"
-                                src="/Qiskit_SVG/qiskit_white.svg"
+                                src="/brand/qiskit_white.svg"
                                 className="w-48 sm:w-60 md:w-72 lg:w-75 h-auto"
                             />
                         </div>
