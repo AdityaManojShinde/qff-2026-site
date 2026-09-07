@@ -1,24 +1,61 @@
+"use client";
+
 import SectionContainer from "@/components/common/SectionContainer";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
+import { useEffect, useState } from "react";
 // TODO: change image url to brand image
 
+const EVENT_DATE_ISO = "2026-11-03T04:00:00Z"; // matches content/schedule.ts check-in time
+
+function getTimeRemaining() {
+    const diff = Math.max(new Date(EVENT_DATE_ISO).getTime() - Date.now(), 0);
+    return {
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor((diff / 3600000) % 24),
+        minutes: Math.floor((diff / 60000) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+    };
+}
+
+function useCountdown() {
+    const [time, setTime] = useState({
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+    });
+
+    useEffect(() => {
+        const update = () => setTime(getTimeRemaining());
+
+        update();
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
+
+        const id = setInterval(update, 1000);
+
+        return () => clearInterval(id);
+    }, []);
+
+    return time;
+}
+
 export default function Hero() {
+    const { days, hours, minutes, seconds } = useCountdown();
+
     return (
         <section
             className="bg-foreground min-h-screen flex items-center justify-center py-20 lg:py-0"
             id="hero"
         >
-            {/* Plain, non-flex wrapper: keeps SectionContainer's own mx-auto from
-                fighting the flex parent's stretch/grow, so its width behaves
-                identically here and inside Navbar. */}
             <div className="w-full">
                 <SectionContainer>
                     <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-16 text-white">
 
-                        {/* Hero Content */}
                         <div className="flex flex-col items-start justify-center w-full lg:max-w-3xl">
 
                             <div className="text-purple-300 font-mono text-xs sm:text-sm">
@@ -41,43 +78,38 @@ export default function Hero() {
                                 real IBM hardware, no hype.
                             </p>
 
-                            {/* Countdown */}
                             <div className="flex mt-8 sm:mt-10 gap-5 sm:gap-7 lg:gap-8">
 
-                                {/* Days */}
                                 <div className="flex flex-col items-start">
                                     <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        56
+                                        {String(days).padStart(2, "0")}
                                     </div>
                                     <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
                                         DAYS
                                     </div>
                                 </div>
 
-                                {/* Hours */}
                                 <div className="flex flex-col items-start">
                                     <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        15
+                                        {String(hours).padStart(2, "0")}
                                     </div>
                                     <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
                                         HRS
                                     </div>
                                 </div>
 
-                                {/* Minutes */}
                                 <div className="flex flex-col items-start">
                                     <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        07
+                                        {String(minutes).padStart(2, "0")}
                                     </div>
                                     <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
                                         MIN
                                     </div>
                                 </div>
 
-                                {/* Seconds */}
                                 <div className="flex flex-col items-start">
                                     <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        56
+                                        {String(seconds).padStart(2, "0")}
                                     </div>
                                     <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
                                         SEC
@@ -91,7 +123,6 @@ export default function Hero() {
                             </Button>
                         </div>
 
-                        {/* Hero Image */}
                         <div className="shrink-0">
                             <Image
                                 loading={"eager"}
