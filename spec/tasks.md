@@ -37,6 +37,18 @@ Tasks marked **STORY** produce user-facing content. They carry their own accepta
 
 ---
 
+## M0.5 — Corrective tasks (Pushkar, before assigning further work)
+
+Recorded 6 September after auditing the first two merged PRs. Do these before Task A/B/C below, or three more sections get built on the same wrong foundation.
+
+- [ ] **M0-FIX-01** Add `output: 'export'` and `images: { unoptimized: true }` to `next.config.ts` (both `Hero.tsx` and `Navbar.tsx` already use `next/image`)
+- [ ] **M0-FIX-02** Replace Geist/Geist Mono/Inter in `layout.tsx` with self-hosted IBM Plex Sans + Plex Mono per `M0-SETUP-05`
+- [ ] **M0-FIX-03** Create `lib/tokens.ts` from `CONTRACT.md` Exact values; replace the hand-written CSS custom properties in `globals.css`, including dropping the invented `#7B70C3` and remapping `--destructive` off `#FF7EB6` onto an actual warning colour, and wiring `--primary`/button colour to Blue 60 `#0F62FE` per the pinned semantic assignment
+- [ ] **M0-FIX-04** Scaffold empty typed `content/` modules (one file per remaining section, matching `architecture.md`'s structure) so Tasks A/B/C import from a consistent shape from their first commit rather than each inventing one
+- [ ] **M0-FIX-05** Fix `layout.tsx` metadata — still the `create-next-app` default title/description. Real title, description, OG tags
+- [ ] **M0-FIX-06** Connect the Cloudflare Pages project to the repo now (M0-OPS-01) — don't wait for M1. Build command `npm run build`, output directory `out`, pin the Node version. Every push to `main` and every PR gets a URL from this point on
+- [ ] **M0-FIX-07** Create a standing Google Form (or Airtable) covering the fields in `architecture.md` §3 as closely as the tool allows. This is the real interim registration path — see M1-OPS-04
+
 ## M1 — The site says something true
 
 ### Content (all STORY)
@@ -65,6 +77,7 @@ Tasks marked **STORY** produce user-facing content. They carry their own accepta
 - [ ] **M1-OPS-01** Write the banned-adjective lint script; wire into `npm run lint`
 - [ ] **M1-OPS-02** Full `spec/smoke.md` pass including §4 and §5
 - [ ] **M1-OPS-03** Record the M1 verdict table in `spec/evals.md` §7
+- [ ] **M1-OPS-04** Point the Register CTA (nav button + hero button + `/register` page) at the standing Google Form URL from M0-FIX-07. Add one line above the form embed/link: "Filling this in directly — the full registration page is coming." This is what makes M1 genuinely deployable rather than content-complete with a dead button
 
 ---
 
