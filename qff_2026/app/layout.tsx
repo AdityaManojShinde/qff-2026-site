@@ -31,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-screen flex flex-col">
       {/*Navbar*/}
       <Navbar/>
+      {/*Main Content*/}
       <main className={"flex-1 mt-16"}>
         {children}
       </main>
