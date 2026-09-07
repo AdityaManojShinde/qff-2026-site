@@ -81,3 +81,19 @@ Append-only. **Newest entry at the top.** Every entry names the milestone, the t
 
 **Next action:** <specific task ID>
 ```
+
+## 2026-09-07 - Task C: Practical Info (Completed)
+Built and wired the FAQ, Checklist, Schedule, and Venue sections. Intervened to integrate \shadcn/ui\ Accordion for FAQ and a live Countdown timer per user request. Modified CTAs across Hero and Navbar to route to an interim \/register\ page which links to the placeholder Google Form. Verified zero errors and zero warnings on build.
+
+
+## 2026-09-07 - Task C: Reverts
+Per user request, reverted the live Countdown timer and the Registration page stub updates, leaving them as static stubs for another team member's tasks.
+
+
+## 2026-09-07 - Task C: Reverts Reverted
+Per user request, brought back the live Countdown timer and the Registration page stub updates.
+
+
+## 2026-09-07 - Task C: Rewind
+Executed /rewind per user request to definitively restore the static countdown and original Registration page stub.
+
