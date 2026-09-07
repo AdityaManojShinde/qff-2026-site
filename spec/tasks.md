@@ -55,20 +55,20 @@ Recorded 6 September after auditing the first two merged PRs. Do these before Ta
 - [x] **M1-CONTENT-01** **STORY** Write `content/myths.ts` — 4 claim/correction pairs. *Acceptance:* each correction contains a specific number or a linked source; none uses a banned adjective; at minimum covers "tries every answer at once" and "breaks encryption soon"; lead-approved.
 - [x] **M1-CONTENT-02** **STORY** Write `content/decade.ts` — 2016–2026, one entry per year, each stating what was claimed at the time versus what was achieved. *Acceptance:* every entry sourced; final entry is this fest; reads as an argument, not a timeline.
 - [ ] **M1-CONTENT-03** **STORY** Write `content/sessions.ts` from the confirmed Part 1 and Part 2 descriptions. *Acceptance:* duration ranges stated; Part 2 lists gates, noise, transpilation, NISQ limits and the closing challenge; no claim that every participant runs a personal job on a QPU unless verified (`architecture.md` §8).
-- [ ] **M1-CONTENT-04** **STORY** Write `content/faq.ts` — minimum: is it free, do I need a background, do I need my own hardware, will I get a certificate, can I attend from another college, what do I install. *Acceptance:* answers are direct, no hedging.
-- [ ] **M1-CONTENT-05** **STORY** Write `content/checklist.ts` — IBM Quantum account creation, laptop, Python and Qiskit install. *Acceptance:* a first-year could follow it without asking anyone.
-- [ ] **M1-CONTENT-06** Write `content/schedule.ts` — times as UTC ISO, rendered IST via `lib/format.ts`
+- [x] **M1-CONTENT-04** **STORY** Write `content/faq.ts` — minimum: is it free, do I need a background, do I need my own hardware, will I get a certificate, can I attend from another college, what do I install. *Acceptance:* answers are direct, no hedging.
+- [x] **M1-CONTENT-05** **STORY** Write `content/checklist.ts` — IBM Quantum account creation, laptop, Python and Qiskit install. *Acceptance:* a first-year could follow it without asking anyone.
+- [x] **M1-CONTENT-06** Write `content/schedule.ts` — times as UTC ISO, rendered IST via `lib/format.ts`
 - [ ] **M1-CONTENT-07** **STORY** Write `content/speakers.ts` — IBM speaker featured. *Acceptance:* no invented names, no placeholder bios. Blocked until names are confirmed.
 
 ### UI
 - [x] **M1-UI-01** Build `SectionMyths` — claim stated, correction revealed on interaction; `MAGENTA_40` for corrections
 - [x] **M1-UI-02** Build `SectionDecade` — 2016–2026 timeline
 - [ ] **M1-UI-03** Build `SectionSessions` — Part 1 and Part 2 cards
-- [ ] **M1-UI-04** Build `SectionSchedule` with `components/ui/ScheduleRow.tsx`
-- [ ] **M1-UI-05** Build `SectionFaq` with `components/ui/FaqItem.tsx` — accessible disclosure, keyboard operable
-- [ ] **M1-UI-06** Build `SectionChecklist`
+- [x] **M1-UI-04** Build `SectionSchedule` with `components/ui/ScheduleRow.tsx`
+- [x] **M1-UI-05** Build `SectionFaq` with `components/ui/FaqItem.tsx` — accessible disclosure, keyboard operable
+- [x] **M1-UI-06** Build `SectionChecklist`
 - [ ] **M1-UI-07** Build `SectionSpeakers` with `components/ui/SpeakerCard.tsx`
-- [ ] **M1-UI-08** Build `SectionVenue` — address, static map image (not an embed — INV-5), named contacts
+- [x] **M1-UI-08** Build `SectionVenue` — address, static map image (not an embed — INV-5), named contacts
 - [ ] **M1-UI-09** Build `SectionAbout` — what Fall Fest is, and that this one is open beyond MIT-ADT. State the openness prominently; it is a genuine differentiator against DBATU
 - [ ] **M1-UI-10** Add the noise-resolving-into-signal hero treatment, `prefers-reduced-motion` guarded
 - [ ] **M1-UI-11** Add a QR code image linking to `/register` for use on slides and posters

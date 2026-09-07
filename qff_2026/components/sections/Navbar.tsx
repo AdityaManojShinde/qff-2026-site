@@ -9,10 +9,11 @@ import Image from "next/image";
 // sample links for the navbar, you can replace them with your own links
 const nav_links: { name: string; href: string }[] = [
     {name: "Home", href: "/"},
-    {name: "About", href: "#"},
-    {name: "Schedule", href: "#"},
-    {name: "Speakers", href: "#"},
-    {name: "FAQ", href: "#"},
+    {name: "About", href: "#about"},
+    {name: "Schedule", href: "#schedule"},
+    {name: "Checklist", href: "#checklist"},
+    {name: "FAQ", href: "#faq"},
+    {name: "Venue", href: "#venue"},
 ];
 
 export default function Navbar() {
