@@ -90,6 +90,7 @@ export default function Hero() {
                     {/* Hero Image */}
                     <div className="shrink-0">
                         <Image
+                            loading={"eager"}
                             height={300}
                             width={300}
                             alt="Qskit Brand Logo"
