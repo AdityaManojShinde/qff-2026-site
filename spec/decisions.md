@@ -162,7 +162,16 @@ The rejected list is the part that does the work. Without it, the same option ge
 ---
 
 ## Template
+## D-012 — shadcn/ui + Base UI as the component layer
 
+**Status:** decided
+**Decision:** Use shadcn (CLI-generated components) on top of `@base-ui/react` primitives for `components/ui/`, alongside `class-variance-authority` for variants and `lucide-react` for icons, instead of hand-rolling each shared component from scratch.
+**Rationale:** Gives the team accessible, pre-tested component primitives (focus states, ARIA, keyboard behaviour) out of the box, which matters for the accessibility bar in `architecture.md §6` (Lighthouse A11y ≥ 95). Faster than hand-building `Button`, form primitives, and disclosure components from zero with a nine-week runway. Components are copied into the repo (not a runtime dependency on a component library), so they're fully editable and themeable via `lib/tokens.ts` — no lock-in.
+**Rejected:**
+- *Hand-rolled components from scratch* — more control, but slower, and reinventing accessible primitives is exactly what shadcn already solves.
+- *A full component library dependency (Radix directly, Chakra, MUI)* — shadcn's copy-in model keeps `components/ui/` fully owned and editable in-repo, matching the existing "Pushkar owns `components/ui/`" convention.
+
+**Revisit if:** shadcn's generated output causes bundle-size or accessibility regressions that break the budget in `architecture.md §6`.
 ```
 ## D-0XX — <short title>
 
