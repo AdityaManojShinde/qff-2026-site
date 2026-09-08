@@ -4,11 +4,11 @@ import { sessions } from "@/content/sessions";
 
 export default function SectionSessions() {
     return (
-        <section id="sessions" className="py-20 lg:py-32 bg-secondary">
+        <section id="sessions" className="py-20 lg:py-32 bg-foreground">
             <SectionContainer>
-                <div className="max-w-4xl mx-auto">
+
                     <SectionLabel number="05" label="Sessions" />
-                    <h2 className="text-3xl md:text-5xl font-bold mb-12">What happens on the day</h2>
+                    <h2 className="text-3xl md:text-5xl font-bold mb-12 text-white">What happens on the day</h2>
                     <div className="grid gap-6 md:grid-cols-2">
                         {sessions
                             .sort((a, b) => a.order - b.order)
@@ -24,7 +24,7 @@ export default function SectionSessions() {
                                 </div>
                             ))}
                     </div>
-                </div>
+
             </SectionContainer>
         </section>
     );
