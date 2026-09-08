@@ -1,7 +1,16 @@
+"use client";
 import SectionContainer from "@/components/common/SectionContainer";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
+
+// Dynamically import the countdown with SSR disabled.
+// This prevents Next.js hydration errors since the server and client times will differ.
+const Countdown = dynamic(() => import("@/components/ui/Countdown"), {
+    ssr: false,
+    loading: () => <div className="min-h-15 mt-8 sm:mt-10" />
+});
 
 // TODO: change image url to brand image
 
@@ -41,49 +50,11 @@ export default function Hero() {
                                 real IBM hardware, no hype.
                             </p>
 
-                            {/* Countdown */}
-                            <div className="flex mt-8 sm:mt-10 gap-5 sm:gap-7 lg:gap-8">
-
-                                {/* Days */}
-                                <div className="flex flex-col items-start">
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        56
-                                    </div>
-                                    <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
-                                        DAYS
-                                    </div>
-                                </div>
-
-                                {/* Hours */}
-                                <div className="flex flex-col items-start">
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        15
-                                    </div>
-                                    <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
-                                        HRS
-                                    </div>
-                                </div>
-
-                                {/* Minutes */}
-                                <div className="flex flex-col items-start">
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        07
-                                    </div>
-                                    <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
-                                        MIN
-                                    </div>
-                                </div>
-
-                                {/* Seconds */}
-                                <div className="flex flex-col items-start">
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        56
-                                    </div>
-                                    <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
-                                        SEC
-                                    </div>
-                                </div>
-                            </div>
+                            {/* Render Isolated Countdown Component */}
+                            <Countdown
+                                targetDate="2026-11-03T09:00:00+05:30"
+                                className="mt-8 sm:mt-10"
+                            />
 
                             <Button className="rounded-none py-5 sm:py-6 px-8 sm:px-10 mt-8 sm:mt-10">
                                 Register
