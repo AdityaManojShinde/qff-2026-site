@@ -6,7 +6,7 @@ export default function SectionVenue() {
     return (
         <section id="venue" className="py-20 lg:py-32">
             <SectionContainer>
-                <div className="max-w-5xl mx-auto">
+
                     <SectionLabel number="11" label="Venue" />
                     <h2 className="text-3xl md:text-5xl font-bold mb-12">Getting Here</h2>
                     
@@ -36,7 +36,7 @@ export default function SectionVenue() {
                             />
                         </div>
                     </div>
-                </div>
+
             </SectionContainer>
         </section>
     );

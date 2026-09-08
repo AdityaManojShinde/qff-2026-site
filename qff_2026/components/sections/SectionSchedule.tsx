@@ -11,7 +11,7 @@ export default function SectionSchedule() {
                   fixed alignment issue: Removed 'mx-auto' here.
                   Leaving 'max-w-4xl' ensures the schedule doesn't stretch
                   too wide on large screens, but it will now properly align
-                  to the left edge with the rest of your page content.
+                  to the left edge with the rest of page content.
                 */}
                 <div className="max-w-4xl">
                     <SectionLabel number="07" label="Schedule" />
