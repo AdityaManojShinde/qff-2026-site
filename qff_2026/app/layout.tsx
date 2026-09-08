@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 
+
+// Todo: Chnage urls to actual urls after deployment, currently using localhost for development
+
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({

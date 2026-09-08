@@ -59,9 +59,11 @@ export default function Navbar() {
                             }
                         </ul>
                         {/*CTA Btn*/}
-                        <Button className={"rounded-none"}>
-                            Register <ArrowRight />
-                        </Button>
+                        <Link href="/register">
+                            <Button className={"rounded-none"}>
+                                Register <ArrowRight />
+                            </Button>
+                        </Link>
                     </div>
                     <div className={"md:hidden"}>
                         <Button onClick={() => setIsOpen(!isOpen)} variant={'outline'}>
@@ -82,9 +84,11 @@ export default function Navbar() {
                                     }
                                 </ul>
                                 {/*CTA Btn*/}
-                                <Button className={"mt-4 w-full"}>
-                                    Register <ArrowRight />
-                                </Button>
+                                <Link href="/register">
+                                    <Button className={"mt-4 w-full"}>
+                                        Register <ArrowRight />
+                                    </Button>
+                                </Link>
                             </div>
                         )}
 

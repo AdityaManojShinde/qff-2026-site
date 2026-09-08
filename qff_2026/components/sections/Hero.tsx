@@ -1,61 +1,33 @@
 "use client";
-
 import SectionContainer from "@/components/common/SectionContainer";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+// Dynamically import the countdown with SSR disabled.
+// This prevents Next.js hydration errors since the server and client times will differ.
+const Countdown = dynamic(() => import("@/components/ui/Countdown"), {
+    ssr: false,
+    loading: () => <div className="min-h-15 mt-8 sm:mt-10" />
+});
+
 // TODO: change image url to brand image
 
-const EVENT_DATE_ISO = "2026-11-03T04:00:00Z"; // matches content/schedule.ts check-in time
-
-function getTimeRemaining() {
-    const diff = Math.max(new Date(EVENT_DATE_ISO).getTime() - Date.now(), 0);
-    return {
-        days: Math.floor(diff / 86400000),
-        hours: Math.floor((diff / 3600000) % 24),
-        minutes: Math.floor((diff / 60000) % 60),
-        seconds: Math.floor((diff / 1000) % 60),
-    };
-}
-
-function useCountdown() {
-    const [time, setTime] = useState({
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-    });
-
-    useEffect(() => {
-        const update = () => setTime(getTimeRemaining());
-
-        update();
-
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            return;
-        }
-
-        const id = setInterval(update, 1000);
-
-        return () => clearInterval(id);
-    }, []);
-
-    return time;
-}
-
 export default function Hero() {
-    const { days, hours, minutes, seconds } = useCountdown();
-
     return (
         <section
             className="bg-foreground min-h-screen flex items-center justify-center py-20 lg:py-0"
             id="hero"
         >
+            {/* Plain, non-flex wrapper: keeps SectionContainer's own mx-auto from
+                fighting the flex parent's stretch/grow, so its width behaves
+                identically here and inside Navbar. */}
             <div className="w-full">
                 <SectionContainer>
                     <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-16 text-white">
 
+                        {/* Hero Content */}
                         <div className="flex flex-col items-start justify-center w-full lg:max-w-3xl">
 
                             <div className="text-purple-300 font-mono text-xs sm:text-sm">
@@ -78,44 +50,11 @@ export default function Hero() {
                                 real IBM hardware, no hype.
                             </p>
 
-                            <div className="flex mt-8 sm:mt-10 gap-5 sm:gap-7 lg:gap-8">
-
-                                <div className="flex flex-col items-start">
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        {String(days).padStart(2, "0")}
-                                    </div>
-                                    <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
-                                        DAYS
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col items-start">
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        {String(hours).padStart(2, "0")}
-                                    </div>
-                                    <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
-                                        HRS
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col items-start">
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        {String(minutes).padStart(2, "0")}
-                                    </div>
-                                    <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
-                                        MIN
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col items-start">
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                                        {String(seconds).padStart(2, "0")}
-                                    </div>
-                                    <div className="text-secondary text-[10px] sm:text-xs lg:text-sm">
-                                        SEC
-                                    </div>
-                                </div>
-                            </div>
+                            {/* Render Isolated Countdown Component */}
+                            <Countdown
+                                targetDate="2026-11-03T09:00:00+05:30"
+                                className="mt-8 sm:mt-10"
+                            />
 
                             <Button className="rounded-none py-5 sm:py-6 px-8 sm:px-10 mt-8 sm:mt-10">
                                 Register
@@ -123,6 +62,7 @@ export default function Hero() {
                             </Button>
                         </div>
 
+                        {/* Hero Image */}
                         <div className="shrink-0">
                             <Image
                                 loading={"eager"}
