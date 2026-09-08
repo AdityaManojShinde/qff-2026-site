@@ -18,7 +18,7 @@ export default function SectionFaq() {
                     <Accordion className="w-full">
                         {faqs.map((faq, idx) => (
                             <AccordionItem key={idx} value={`item-${idx}`}>
-                                <AccordionTrigger className="text-left text-lg font-semibold text-secondary">
+                                <AccordionTrigger className="text-left text-lg font-semibold text-white">
                                     {faq.question}
                                 </AccordionTrigger>
                                 <AccordionContent className="text-white leading-relaxed text-base">
