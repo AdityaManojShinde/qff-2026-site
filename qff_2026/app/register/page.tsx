@@ -1,7 +1,6 @@
 import SectionContainer from "@/components/common/SectionContainer";
 import RegistrationForm from "@/components/form/RegistrationForm";
 
-
 export const metadata = {
     title: "Register | Qiskit Fall Fest 2026",
     description: "Secure your spot for the Qiskit Fall Fest 2026 at MIT-ADT University.",
@@ -11,7 +10,7 @@ export default function RegisterPage() {
     return (
         <div className="min-h-screen bg-gray-50 pt-32 pb-20 lg:pt-40 lg:pb-32">
             <SectionContainer>
-                <div className="max-w-3xl mx-auto flex flex-col gap-10">
+                <div className=" flex flex-col gap-10">
 
                     {/* Header Section */}
                     <div className="flex flex-col gap-4">

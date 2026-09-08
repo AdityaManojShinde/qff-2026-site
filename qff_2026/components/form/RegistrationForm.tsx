@@ -1,130 +1,283 @@
 "use client";
 
-import React, { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import * as z from "zod";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import {
+    Field,
+    FieldError,
+    FieldGroup,
+    FieldLabel,
+} from "@/components/ui/field";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+
+const formSchema = z.object({
+    name: z.string().min(2, "Full name must be at least 2 characters"),
+    email: z.email("Please enter a valid email"),
+    phone: z.string().min(10, "Please enter a valid phone number"),
+    college: z.string().min(2, "College name is required"),
+    year: z.string().min(1, "Year of study is required"),
+    session: z.string().min(1, "Please select a session"),
+});
+
+type FormData = z.infer<typeof formSchema>;
+
+// Adjust these to match the actual year and session options for your event.
+const YEAR_OPTIONS = ["1st Year", "2nd Year", "3rd Year", "4th Year", "Other"];
+const SESSION_OPTIONS = [
+    { value: "morning", label: "Morning Session" },
+    { value: "afternoon", label: "Afternoon Session" },
+    { value: "full-day", label: "Full Day (both sessions)" },
+];
+
+const FORM_ID = "registration-form";
 
 export default function RegistrationForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
-    const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const form = useForm<FormData>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            email: "",
+            phone: "",
+            college: "",
+            year: "",
+            session: "",
+        },
+    });
+
+    const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
-
-        // TODO: Replace with your actual submission logic (e.g., fetch to an API or Formspree)
-        // const formData = new FormData(e.currentTarget);
-
-        // Simulating network request
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-
-        setIsSubmitting(false);
-        setIsSuccess(true);
+        setSubmitError(null);
+        try {
+            console.log("Form Submitted:", data);
+            // Add your API submission logic here
+            // await fetch("/api/register", { method: "POST", body: JSON.stringify(data) });
+            form.reset();
+        } catch (err) {
+            console.error(err);
+            setSubmitError("Something went wrong. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
-    if (isSuccess) {
-        return (
-            <div className="bg-green-50 border border-green-200 text-green-800 rounded-lg p-8 text-center">
-                <h3 className="text-2xl font-bold mb-2">Registration Received!</h3>
-                <p>Thank you for registering for Qiskit Fall Fest 2026. We will send a confirmation email with further details shortly.</p>
-            </div>
-        );
-    }
-
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6 bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-sm">
+        <div className="mx-auto w-full max-w-xl px-4 py-10">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Qwiskit Fall Fest 2026 Registration</CardTitle>
+                    <CardDescription>
+                        Fill in your details below to reserve your spot. All fields are
+                        required unless marked optional.
+                    </CardDescription>
+                </CardHeader>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Full Name */}
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="fullName" className="text-sm font-semibold text-gray-900">
-                        Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        id="fullName"
-                        name="fullName"
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        placeholder="Jane Doe"
-                    />
-                </div>
+                <CardContent>
+                    <form id={FORM_ID} onSubmit={form.handleSubmit(onSubmit)}>
+                        <FieldGroup className="gap-6">
+                            <div className="grid gap-6 sm:grid-cols-2">
+                                <Controller
+                                    name="name"
+                                    control={form.control}
+                                    render={({ field, fieldState }) => (
+                                        <Field
+                                            data-invalid={fieldState.invalid}
+                                            className="sm:col-span-2"
+                                        >
+                                            <FieldLabel htmlFor={field.name}>Full name</FieldLabel>
+                                            <Input
+                                                {...field}
+                                                id={field.name}
+                                                aria-invalid={fieldState.invalid}
+                                                placeholder="Jane Doe"
+                                                autoComplete="name"
+                                            />
+                                            {fieldState.invalid && (
+                                                <FieldError errors={[fieldState.error]} />
+                                            )}
+                                        </Field>
+                                    )}
+                                />
 
-                {/* Email */}
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="email" className="text-sm font-semibold text-gray-900">
-                        Email Address <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        placeholder="jane@example.com"
-                    />
-                </div>
-            </div>
+                                <Controller
+                                    name="email"
+                                    control={form.control}
+                                    render={({ field, fieldState }) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                                            <Input
+                                                {...field}
+                                                id={field.name}
+                                                type="email"
+                                                aria-invalid={fieldState.invalid}
+                                                placeholder="jane@college.edu"
+                                                autoComplete="email"
+                                            />
+                                            {fieldState.invalid && (
+                                                <FieldError errors={[fieldState.error]} />
+                                            )}
+                                        </Field>
+                                    )}
+                                />
 
-            {/* University / College */}
-            <div className="flex flex-col gap-2">
-                <label htmlFor="university" className="text-sm font-semibold text-gray-900">
-                    University / College <span className="text-red-500">*</span>
-                </label>
-                <input
-                    type="text"
-                    id="university"
-                    name="university"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="e.g. MIT-ADT University"
-                />
-            </div>
+                                <Controller
+                                    name="phone"
+                                    control={form.control}
+                                    render={({ field, fieldState }) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel htmlFor={field.name}>
+                                                Phone number
+                                            </FieldLabel>
+                                            <Input
+                                                {...field}
+                                                id={field.name}
+                                                type="tel"
+                                                aria-invalid={fieldState.invalid}
+                                                placeholder="98765 43210"
+                                                autoComplete="tel"
+                                            />
+                                            {fieldState.invalid && (
+                                                <FieldError errors={[fieldState.error]} />
+                                            )}
+                                        </Field>
+                                    )}
+                                />
 
-            {/* Experience Level */}
-            <div className="flex flex-col gap-2">
-                <label htmlFor="experience" className="text-sm font-semibold text-gray-900">
-                    Quantum Computing Experience <span className="text-red-500">*</span>
-                </label>
-                <select
-                    id="experience"
-                    name="experience"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white"
-                >
-                    <option defaultValue={"none"} disabled selected>Select your experience level</option>
-                    <option value="none">None - I&#39;m completely new!</option>
-                    <option value="beginner">Beginner - I know the basics (qubits, gates)</option>
-                    <option value="intermediate">Intermediate - I&#39;ve used Qiskit before</option>
-                    <option value="advanced">Advanced - I build quantum algorithms</option>
-                </select>
-            </div>
+                                <Controller
+                                    name="college"
+                                    control={form.control}
+                                    render={({ field, fieldState }) => (
+                                        <Field
+                                            data-invalid={fieldState.invalid}
+                                            className="sm:col-span-2"
+                                        >
+                                            <FieldLabel htmlFor={field.name}>College</FieldLabel>
+                                            <Input
+                                                {...field}
+                                                id={field.name}
+                                                aria-invalid={fieldState.invalid}
+                                                placeholder="MIT ADT University"
+                                            />
+                                            {fieldState.invalid && (
+                                                <FieldError errors={[fieldState.error]} />
+                                            )}
+                                        </Field>
+                                    )}
+                                />
 
-            {/* Expectations */}
-            <div className="flex flex-col gap-2">
-                <label htmlFor="expectations" className="text-sm font-semibold text-gray-900">
-                    What are you hoping to learn or achieve at the event?
-                </label>
-                <textarea
-                    id="expectations"
-                    name="expectations"
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-y"
-                    placeholder="Tell us a bit about why you want to attend..."
-                />
-            </div>
+                                <Controller
+                                    name="year"
+                                    control={form.control}
+                                    render={({ field, fieldState }) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel htmlFor={field.name}>
+                                                Year of study
+                                            </FieldLabel>
+                                            <Select
+                                                name={field.name}
+                                                value={field.value}
+                                                onValueChange={field.onChange}
+                                            >
+                                                <SelectTrigger
+                                                    id={field.name}
+                                                    aria-invalid={fieldState.invalid}
+                                                    className="w-full"
+                                                >
+                                                    <SelectValue placeholder="Select year" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {YEAR_OPTIONS.map((year) => (
+                                                        <SelectItem key={year} value={year}>
+                                                            {year}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                            {fieldState.invalid && (
+                                                <FieldError errors={[fieldState.error]} />
+                                            )}
+                                        </Field>
+                                    )}
+                                />
 
-            {/* Submit Button */}
-            <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full sm:w-auto self-start mt-2 rounded-none px-10 py-6 text-lg"
-            >
-                {isSubmitting ? "Submitting..." : "Complete Registration"}
-            </Button>
+                                <Controller
+                                    name="session"
+                                    control={form.control}
+                                    render={({ field, fieldState }) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel htmlFor={field.name}>Session</FieldLabel>
+                                            <Select
+                                                name={field.name}
+                                                value={field.value}
+                                                onValueChange={field.onChange}
+                                            >
+                                                <SelectTrigger
+                                                    id={field.name}
+                                                    aria-invalid={fieldState.invalid}
+                                                    className="w-full"
+                                                >
+                                                    <SelectValue placeholder="Select session" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {SESSION_OPTIONS.map((session) => (
+                                                        <SelectItem
+                                                            key={session.value}
+                                                            value={session.value}
+                                                        >
+                                                            {session.label}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                            {fieldState.invalid && (
+                                                <FieldError errors={[fieldState.error]} />
+                                            )}
+                                        </Field>
+                                    )}
+                                />
+                            </div>
 
-            <p className="text-xs text-gray-500 mt-2">
-                By registering, you agree to abide by the Qiskit Fall Fest Code of Conduct.
-            </p>
-        </form>
+                            {submitError && (
+                                <p className="text-sm text-destructive">{submitError}</p>
+                            )}
+                        </FieldGroup>
+                    </form>
+                </CardContent>
+
+                <CardFooter>
+                    <Button
+                        type="submit"
+                        form={FORM_ID}
+                        className="w-full"
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        {isSubmitting ? "Registering..." : "Register"}
+                    </Button>
+                </CardFooter>
+            </Card>
+        </div>
     );
 }

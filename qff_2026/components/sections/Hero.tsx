@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 // Dynamically import the countdown with SSR disabled.
 // This prevents Next.js hydration errors since the server and client times will differ.
@@ -12,7 +13,6 @@ const Countdown = dynamic(() => import("@/components/ui/Countdown"), {
     loading: () => <div className="min-h-15 mt-8 sm:mt-10" />
 });
 
-// TODO: change image url to brand image
 
 export default function Hero() {
     return (
@@ -28,7 +28,7 @@ export default function Hero() {
                     <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-16 text-white">
 
                         {/* Hero Content */}
-                        <div className="flex flex-col items-start justify-center w-full lg:max-w-3xl">
+                        <div className="flex flex-col items-center md:items-start justify-center w-full lg:max-w-3xl">
 
                             <div className="text-purple-300 font-mono text-xs sm:text-sm">
                                 01 / Overview
@@ -56,10 +56,12 @@ export default function Hero() {
                                 className="mt-8 sm:mt-10"
                             />
 
-                            <Button className="rounded-none py-5 sm:py-6 px-8 sm:px-10 mt-8 sm:mt-10">
-                                Register
-                                <ArrowRight />
-                            </Button>
+                            <Link href="/register">
+                                <Button className="rounded-none py-5 sm:py-6 px-8 sm:px-10 mt-8 sm:mt-10">
+                                    Register
+                                    <ArrowRight />
+                                </Button>
+                            </Link>
                         </div>
 
                         {/* Hero Image */}
