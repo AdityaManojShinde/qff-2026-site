@@ -73,7 +73,7 @@ export default function RegistrationForm() {
         try {
             console.log("Form Submitted:", data);
             // Add your API submission logic here
-            // await fetch("/api/register", { method: "POST", body: JSON.stringify(data) });
+            await fetch("/api/register", { method: "POST", body: JSON.stringify(data) });
             form.reset();
         } catch (err) {
             console.error(err);
