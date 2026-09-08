@@ -92,9 +92,9 @@ export default function RegistrationForm() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white"
                 >
                     <option defaultValue={"none"} disabled selected>Select your experience level</option>
-                    <option value="none">None - I'm completely new!</option>
+                    <option value="none">None - I&#39;m completely new!</option>
                     <option value="beginner">Beginner - I know the basics (qubits, gates)</option>
-                    <option value="intermediate">Intermediate - I've used Qiskit before</option>
+                    <option value="intermediate">Intermediate - I&#39;ve used Qiskit before</option>
                     <option value="advanced">Advanced - I build quantum algorithms</option>
                 </select>
             </div>
