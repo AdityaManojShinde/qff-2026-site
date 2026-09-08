@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 
   keywords: [
