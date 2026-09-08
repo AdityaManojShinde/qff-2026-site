@@ -6,7 +6,7 @@ export default function SectionChecklist() {
     return (
         <section id="checklist" className="py-20 lg:py-32">
             <SectionContainer>
-                    <SectionLabel number="10" label="Checklist" />
+                    <SectionLabel number="09" label="Checklist" />
                     <h2 className="text-3xl md:text-5xl font-bold mb-12">Pre-event Checklist</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {checklist.map((item) => (

@@ -13,7 +13,7 @@ export default function SectionFaq() {
         <section id="faq" className="py-20 lg:py-32 bg-foreground">
             <SectionContainer>
 
-                    <SectionLabel number="09" label="FAQ" />
+                    <SectionLabel number="08" label="FAQ" />
                     <h2 className="text-3xl md:text-5xl font-bold mb-12">Frequently Asked Questions</h2>
                     <Accordion className="w-full">
                         {faqs.map((faq, idx) => (

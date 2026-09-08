@@ -4,6 +4,28 @@ Append-only. **Newest entry at the top.** Every entry names the milestone, the t
 
 ---
 
+## 2026-09-08 — Reorder landing sections sequentially & fix brand alt typo (session 5)
+
+**Milestone:** M1
+**Tasks:** Section layout ordering & polish
+**Model/tool:** Antigravity
+
+**Done:**
+- Fixed typo in Hero section image alt attribute from `Qskit` to `Qiskit`.
+- Reordered landing page sections in `app/page.tsx` sequentially: Hero (01), About (02), Decade (03), Myths (04), Sessions (05), Speakers (06), Schedule (07), FAQ (08), Checklist (09), Venue (10).
+- Renumbered SectionLabel tags from 1 to 10 sequentially (`SectionFaq` 08, `SectionChecklist` 09, `SectionVenue` 10).
+- Verified clean build (`npm run build`) with Turbopack and static export.
+
+**Not finished:**
+- None for this task.
+
+**Noticed but not fixed:**
+- None.
+
+**Next action:** Push branch to fork origin and open pull request.
+
+---
+
 ## 2026-09-07 — Decade timeline & Myths interactive section built (session 4)
 
 **Milestone:** M1
