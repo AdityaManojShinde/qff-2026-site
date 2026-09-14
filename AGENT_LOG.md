@@ -4,6 +4,39 @@ Append-only. **Newest entry at the top.** Every entry names the milestone, the t
 
 ---
 
+## 2026-09-14 — Vercel deploy backfilled into the record; docs reconciled to match (session 6)
+
+**Milestone:** M1
+**Tasks:** doc-only pass across `decisions.md`, `CONTRACT.md`, `README.md`, `BRIEF.md`, `architecture.md`, `tasks.md`; plus `layout.tsx` metadata, fonts, and `lib/tokens.ts`
+**Model/tool:** Claude Code
+
+**Done:**
+- **Backfilling an undocumented event:** at some point before this session, the site moved off the specced Cloudflare Pages architecture and was deployed to Vercel after fixing a Root Directory / Framework Preset misconfiguration in the Vercel project settings. It has been live since at `https://qff-2026-site.vercel.app`, but nothing in this repo recorded that it happened — `AGENT_LOG.md`, `CONTRACT.md`'s `PROD_URL`, `README.md` and `architecture.md` all still described the original Cloudflare plan. This entry is that missing record.
+- Most of M1 is confirmed live on the production URL: sections 01–10 (Hero, About, Decade, Myths, Sessions, Speakers, Schedule, FAQ, Checklist, Venue) all render, verified by fetching the live page directly rather than trusting the spec.
+- Recorded the move as **D-013**: stated plainly as a practical migration during build, not a reasoned decision, with the registration backend (D1 vs. something Vercel-native) still unresolved — see D-002.
+- Reconciled the rest of the spec to match: `PROD_URL` in `CONTRACT.md`, the live-site line and Stack section in `README.md`, `BRIEF.md`'s "Where things stand," and `architecture.md` §1/§3 marked superseded pending the backend decision (without deleting the original Cloudflare/D1 design — it's still what M2 would build if the backend decision lands that way).
+- Reconciled `spec/tasks.md` against actual repo files and the live site rather than trusting prior commit messages (see Noticed below on why that mattered). Checked off M1-CONTENT-03/M1-UI-03 (Sessions) and M1-CONTENT-07/M1-UI-07 (Speakers), plus several already-satisfied M0-SETUP/M0-UI items.
+- Fixed the two open bugs named as still-outstanding going into this session: the homepage meta description was generic ("celebrating technology, creativity, innovation, and campus culture...") and now describes the actual event; and the font/colour tokens from M0-FIX-02/M0-FIX-03 were still unapplied (Geist/Inter instead of Plex, hand-written CSS vars instead of `lib/tokens.ts`) and are now fixed — see the code changes below.
+- Registration remains intentionally incomplete: a page exists (`app/register/page.tsx`) with a working-looking form, but the backend is deliberately paused pending the D-002 database decision, per this session's explicit boundary. See Noticed below for what "incomplete" currently means in practice.
+
+**Not finished:**
+- The registration backend decision (D-002) itself — this session only documented that it's still open, which is the actual blocker behind almost everything else in Noticed below.
+- `M0-SETUP-02` (`.env.example`) and the `output: 'export'` half of `M0-SETUP-04` — both still missing, previously miscredited as done (see Noticed).
+- Brand asset checksums for INV-9-T (`M0-SETUP-06`).
+
+**Noticed but not fixed (found while reconciling docs, not in the original task list):**
+- **`qff_2026/app/api/register/route.ts` logs the full registration payload via `console.log("Server: ", data)`** — a direct INV-3 violation (personal data in logs) — and doesn't write to any store at all; it just echoes the payload back with a fake 201 "Registration successful", which is an INV-1 violation (a success state with no durable row). This is inside the BOUNDARY this session was told not to touch, so it was not fixed, only flagged. It needs attention before anyone actually submits the form.
+- The registration path is a Next.js API route, a shape `architecture.md` §4 marks **not supported** and D-004 rejected outright for a static-export site. It only works because the site is now on Vercel (D-013). D-001's rejection of Vercel Hobby was never revisited before the move.
+- `next.config.ts` has no `output: 'export'` and the project is on Next.js 16.3.4, not the pinned 15.x — neither matches `architecture.md` §1 as written. Left as-is; this is entangled with the same backend/hosting decision as the API route above, not something to silently "fix" back to static export while a live API route depends on a Node runtime.
+- Commit `f5175c6`'s message claims M0-SETUP-02 (`.env.example`) and part of M0-SETUP-04 (static export) were fixed; the actual diff touched neither. Treat AGENT_LOG-adjacent commit messages as unverified until checked against the diff — this is the second time in this repo's history a claimed fix wasn't real (see the 2026-09-05 entry on treating AI-generated content as unreviewed).
+- `content/speakers.ts` ships an explicit placeholder speaker (`"Speaker Name TBA"`, `isPlaceholder: true`) live in production, which is exactly what M1-CONTENT-07's own acceptance criteria and `AGENTS.md` §4 say not to do. Checked off in `tasks.md` as "built and live" per this session's instructions, but flagged there as not actually meeting its acceptance bar.
+- Brand asset checksums (`M0-SETUP-06`, INV-9-T) were never recorded in `spec/evals.md` §3 — still the unfilled placeholder table.
+- `Hero.tsx` uses `text-destructive` purely as a decorative accent colour for the event date, not for an error state. Remapping `--destructive` to a real warning colour (this session) changes that highlight's colour as a side effect. Not fixed here since `Hero.tsx` wasn't in scope for this pass — whoever owns that section should swap it to an accent token instead.
+
+**Next action:** Resolve D-002 (registration backend) — everything downstream (the fake API route, the Cloudflare/Vercel architecture mismatch, `next.config.ts`) is blocked on that one decision.
+
+---
+
 ## 2026-09-08 — Reorder landing sections sequentially & fix brand alt typo (session 5)
 
 **Milestone:** M1

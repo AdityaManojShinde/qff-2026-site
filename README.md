@@ -4,7 +4,7 @@ The event website for **Qiskit Fall Fest 2026**, hosted by [QQuEST](https://gith
 
 **3 November 2026 · MIT-ADT Pune · Free · Open to students from any college**
 
-🔗 **Live site:** _(deploying — link here at M0)_
+🔗 **Live site:** https://qff-2026-site.vercel.app
 
 ---
 
@@ -22,9 +22,9 @@ No background in physics required. Part 2 assumes basic Python.
 
 ## About this repo
 
-A static site built with Next.js and deployed on Cloudflare Pages. Registration is handled by a small Cloudflare Worker writing to D1, mirrored to a Google Sheet for the organising team.
+A static site built with Next.js, deployed on Vercel. The registration backend is undecided — see `spec/decisions.md` D-002, D-013.
 
-**Stack:** Next.js 15 (static export) · TypeScript · Tailwind 4 · Cloudflare Pages, Workers, D1
+**Stack:** Next.js · TypeScript · Tailwind 4 · Vercel. Registration backend: undecided — see `spec/decisions.md` D-002, D-013
 
 **Design:** IBM Carbon palette and IBM Plex, taken from the official Qiskit Fall Fest 2026 brand assets.
 

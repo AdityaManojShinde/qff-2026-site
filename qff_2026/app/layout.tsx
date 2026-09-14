@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/sections/Navbar";
@@ -8,23 +7,11 @@ import Footer from "@/components/sections/Footer";
 
 // Todo: Change urls to actual urls after deployment, currently using localhost for development
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL( process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"), // required for resolving image URLs
 
   title: "Qiskit Fall Fest 2026 | MIT ADT University, Pune",
-  description: "Qiskit Fall Fest 2026 is a college festival celebrating technology, creativity, innovation, and campus culture with exciting events, competitions, and activities for students.",
+  description: "A one-day quantum computing event at MIT Art, Design and Technology University, Pune, on 3 November 2026 — two sessions, Quantum 101 and Hands-on with Qiskit, running on real IBM quantum hardware.",
 
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
@@ -95,7 +82,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
+      className={cn("h-full", "antialiased", "font-sans")}
     >
       <body className="min-h-screen flex flex-col">
       {/*Navbar*/}

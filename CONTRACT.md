@@ -229,7 +229,7 @@ BLOCKED_HOSTS = [
 ### Operational limits
 
 ```
-PROD_URL            = https://qff-2026-mitadt.pages.dev   /* confirm exact subdomain at M0-OPS-01; pages.dev names are globally unique */
+PROD_URL            = https://qff-2026-site.vercel.app
 EVENT_DATE_UTC      = 2026-11-03
 DATA_DELETION_DATE  = 2027-01-02
 EXPECTED_REGISTRATIONS = 300        /* design point; revisit at 800 */

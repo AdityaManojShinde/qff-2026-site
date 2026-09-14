@@ -172,7 +172,19 @@ The rejected list is the part that does the work. Without it, the same option ge
 - *A full component library dependency (Radix directly, Chakra, MUI)* — shadcn's copy-in model keeps `components/ui/` fully owned and editable in-repo, matching the existing "Pushkar owns `components/ui/`" convention.
 
 **Revisit if:** shadcn's generated output causes bundle-size or accessibility regressions that break the budget in `architecture.md §6`.
-```
+
+---
+
+## D-013 — Hosting moved to Vercel; a practical migration, not a reasoned decision
+
+**Status:** decided (as a record of what actually happened — not a considered architectural trade-off)
+**Decision:** The site is deployed and live at `https://qff-2026-site.vercel.app`, on Vercel. This supersedes Cloudflare Pages as the hosting platform recorded in D-001 and `spec/architecture.md` §1.
+**Rationale:** This was not evaluated the way D-001 was. It happened as a practical migration partway through build — the team moved to whatever got a URL live and iterating — and the spec was never updated to match, which is the drift this entry exists to close. One consequence worth naming plainly: Vercel's Node runtime is what has made it possible to add `app/api/register/route.ts` as a Next.js API route, a shape `architecture.md` §4 lists as **not supported** and D-004 rejected outright ("incompatible with `output: 'export'`. Would build and then fail in production."). That route currently exists, is unfinished, and is out of scope for this entry — see the note below. The registration backend question this entry leaves open is not just "D1 vs. something else on the same architecture" — it's whether the architecture itself is still Cloudflare-shaped at all.
+**Rejected:** Nothing was actually evaluated or rejected at the time of the move — that absence is the point of this entry. D-001 explicitly rejected Vercel Hobby ("its terms are non-commercial-only, and keeping the Worker in the same account as the site is simpler on Cloudflare"); that rejection was never revisited before the move happened.
+**Revisit if:** The registration backend decision (D1 vs. a Vercel-native store — see D-002, still unresolved) is made. That decision should either (a) confirm Vercel as the permanent host, formally supersede D-001's hosting choice, and update `architecture.md`'s stack table and INV-7's Cloudflare-specific wording in `CONTRACT.md`, or (b) move hosting back to Cloudflare Pages + Workers + D1 per the original design. Until then the project is straddling both — Vercel hosting, a stub API route standing in for the Worker, D1 never provisioned — which is not a stable place to leave it.
+
+---
+
 ## D-0XX — <short title>
 
 **Status:** proposed | decided | superseded by D-0YY

@@ -1,59 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-
-@font-face {
-  font-family: "IBM Plex Sans";
-  src: url("/fonts/IBMPlexSans-ExtraLight.woff2") format("woff2");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "IBM Plex Sans";
-  src: url("/fonts/IBMPlexSans-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "IBM Plex Sans";
-  src: url("/fonts/IBMPlexSans-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "IBM Plex Sans";
-  src: url("/fonts/IBMPlexSans-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "IBM Plex Sans";
-  src: url("/fonts/IBMPlexSans-SemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "IBM Plex Mono";
-  src: url("/fonts/IBMPlexMono-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+@import "@ibm/plex-sans/css/ibm-plex-sans-all.css";
+@import "@ibm/plex-mono/css/ibm-plex-mono-all.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
   --font-sans: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -94,21 +51,21 @@
 }
 
 :root {
-  --background: #F2F4F8; /* <- changed to cream color */
-  --foreground: #31135E; /* <- changed to dark purple */
+  --background: #F2F4F8; /* Cool Gray 10 */
+  --foreground: #31135E; /* Purple 90 — surface.primary */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #8B3FFC; /* <- changed to purple */
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: #7B70C3; /* <- changed to light purple */
-  --secondary-foreground: oklch(0.205 0 0);
+  --primary: #0F62FE; /* Blue 60 — interactive, per CONTRACT.md's pinned semantic assignment */
+  --primary-foreground: #F4F4F4; /* Gray 10 */
+  --secondary: #BE95FF; /* Purple 40 — was an invented #7B70C3, not in the palette */
+  --secondary-foreground: #161616; /* Gray 100 */
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: #FF7EB6; /* <- changed to pinkish */
+  --destructive: #DA1E28; /* IBM Carbon support-error red — was #FF7EB6, the brand's positive accent, wrong semantic fit for an error colour. Not in CONTRACT.md's palette; needs lead sign-off. See lib/tokens.ts */
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);

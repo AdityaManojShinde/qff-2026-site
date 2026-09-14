@@ -2,6 +2,8 @@
 
 ## 1. Stack
 
+**SUPERSEDED — hosting moved to Vercel, see `decisions.md` D-013.** The D1 schema and Worker design below reflect the original plan and may not match what's built. Do not treat this section as current until the database decision lands.
+
 | Layer | Choice | Version | Why |
 |---|---|---|---|
 | Language | TypeScript | 5.x, `strict: true` | Team is Node-based; strict mode catches the class of bug nobody reviews for |
@@ -64,6 +66,8 @@ Rules for each location:
 - **`worker/`** — separate deployment lifecycle from the site. Changes here do not require a site rebuild and vice versa. Keep normalisation logic pure and separate from I/O so it can be tested without network.
 
 ## 3. Data model
+
+**SUPERSEDED — hosting moved to Vercel, see `decisions.md` D-013.** The D1 schema and Worker design below reflect the original plan and may not match what's built. Do not treat this section as current until the database decision lands.
 
 Single table. That is the whole model, and it should stay that way until M3.
 

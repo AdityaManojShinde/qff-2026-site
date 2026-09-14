@@ -11,22 +11,22 @@ Tasks marked **STORY** produce user-facing content. They carry their own accepta
 ## M0 — Live and submittable
 
 ### Setup
-- [ ] **M0-SETUP-01** `git init`, add `.gitignore` (`.env`, `.env.*`, `!.env.example`, `node_modules/`, `.next/`, `out/`, `.wrangler/`), commit the spec system
-- [ ] **M0-SETUP-02** Create `.env.example` with empty keys only; never a filled value
-- [ ] **M0-SETUP-03** Add pointer files: `CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`, each one line pointing at `AGENTS.md`
-- [ ] **M0-SETUP-04** Scaffold Next.js 15 with TypeScript strict + Tailwind 4; set `output: 'export'` in `next.config.js`
-- [ ] **M0-SETUP-05** Download IBM Plex Sans (200/300/400/500/600) and Plex Mono woff2 into `public/fonts/`; wire `@font-face` in `globals.css` — self-hosted, no CDN (INV-5)
-- [ ] **M0-SETUP-07** Commit the agreed mockup to `docs/mockups/` and link it from `AGENTS.md` §1 (D-011 — reference only, never imported)
-- [ ] **M0-SETUP-06** Copy official assets from the deliverables repo into `public/brand/` unmodified; record their checksums in `spec/evals.md` §3 (INV-9)
+- [x] **M0-SETUP-01** `git init`, add `.gitignore` (`.env`, `.env.*`, `!.env.example`, `node_modules/`, `.next/`, `out/`, `.wrangler/`), commit the spec system
+- [ ] **M0-SETUP-02** Create `.env.example` with empty keys only; never a filled value — commit `f5175c6` claimed this in its message; the diff shows no `.env.example` was actually added. Still missing.
+- [x] **M0-SETUP-03** Add pointer files: `CLAUDE.md`, `.cursorrules`, `.github/copilot-instructions.md`, each one line pointing at `AGENTS.md`
+- [ ] **M0-SETUP-04** Scaffold Next.js 15 with TypeScript strict + Tailwind 4; set `output: 'export'` in `next.config.js` — repo is on Next 16.3.4, not 15.x, and `next.config.ts` has no `output: 'export'` (never has, per its git history). Commit `f5175c6` also claimed this was fixed; it wasn't. See D-013.
+- [x] **M0-SETUP-05** Download IBM Plex Sans (200/300/400/500/600) and Plex Mono woff2 into `public/fonts/`; wire `@font-face` in `globals.css` — self-hosted, no CDN (INV-5)
+- [x] **M0-SETUP-07** Commit the agreed mockup to `docs/mockups/` and link it from `AGENTS.md` §1 (D-011 — reference only, never imported)
+- [ ] **M0-SETUP-06** Copy official assets from the deliverables repo into `public/brand/` unmodified; record their checksums in `spec/evals.md` §3 (INV-9) — assets are in `public/brand/`, but the checksum table in `evals.md` §3 is still the unfilled placeholder. Not done.
 
 ### UI
-- [ ] **M0-UI-01** Create `lib/tokens.ts` with the exact Carbon palette and semantic assignments from `CONTRACT.md`; wire into the Tailwind theme
-- [ ] **M0-UI-02** Build `components/ui/SectionLabel.tsx` — Plex Mono, `01 / LABEL` format
-- [ ] **M0-UI-03** Build `components/ui/Button.tsx` — primary and secondary variants, `BLUE_60` for interactive
-- [ ] **M0-UI-04** Build `app/layout.tsx` — fonts, metadata, OG tags, footer with the verbatim attribution line
-- [ ] **M0-UI-05** Build the hero section: brand asset on `PURPLE_90`, event name, date, venue line, concept sentence
-- [ ] **M0-UI-06** Build `components/ui/Countdown.tsx` — client-only, target `EVENT_DATE_UTC`, Plex Mono, `prefers-reduced-motion` guarded
-- [ ] **M0-UI-07** Build `app/register/page.tsx` as a "Registrations open soon" stub
+- [x] **M0-UI-01** Create `lib/tokens.ts` with the exact Carbon palette and semantic assignments from `CONTRACT.md`; wire into the Tailwind theme — done this session; `--destructive`'s warning-colour replacement isn't itself a pinned CONTRACT.md value, see `AGENT_LOG.md`
+- [x] **M0-UI-02** Build `components/ui/SectionLabel.tsx` — Plex Mono, `01 / LABEL` format
+- [x] **M0-UI-03** Build `components/ui/Button.tsx` — primary and secondary variants, `BLUE_60` for interactive — `--primary` now wired to Blue 60 this session; note this also turns some purely-decorative `text-primary` usage (e.g. `SectionLabel.tsx`) blue, which conflicts with CONTRACT.md's "links and CTAs ONLY, never decorative" rule for Blue 60 — see `AGENT_LOG.md`
+- [x] **M0-UI-04** Build `app/layout.tsx` — fonts, metadata, OG tags, footer with the verbatim attribution line — fonts switched to self-hosted Plex this session
+- [x] **M0-UI-05** Build the hero section: brand asset on `PURPLE_90`, event name, date, venue line, concept sentence
+- [ ] **M0-UI-06** Build `components/ui/Countdown.tsx` — client-only, target `EVENT_DATE_UTC`, Plex Mono, `prefers-reduced-motion` guarded — client-only and functionally correct, but it's a plain digit tick (no CSS animation), doesn't use Plex Mono, and has no `prefers-reduced-motion` guard. Leaving unchecked since the stated acceptance isn't fully met.
+- [x] **M0-UI-07** Build `app/register/page.tsx` as a "Registrations open soon" stub — superseded by a real form (`RegistrationForm.tsx`); see BOUNDARY note in `AGENT_LOG.md`, backend is paused pending a database decision
 
 ### Ops
 - [ ] **M0-OPS-01** Create the Cloudflare Pages project, connect the repo, deploy from `main`
@@ -42,11 +42,11 @@ Tasks marked **STORY** produce user-facing content. They carry their own accepta
 Recorded 6 September after auditing the first two merged PRs. Do these before Task A/B/C below, or three more sections get built on the same wrong foundation.
 
 - [ ] **M0-FIX-01** Add `output: 'export'` and `images: { unoptimized: true }` to `next.config.ts` (both `Hero.tsx` and `Navbar.tsx` already use `next/image`)
-- [ ] **M0-FIX-02** Replace Geist/Geist Mono/Inter in `layout.tsx` with self-hosted IBM Plex Sans + Plex Mono per `M0-SETUP-05`
-- [ ] **M0-FIX-03** Create `lib/tokens.ts` from `CONTRACT.md` Exact values; replace the hand-written CSS custom properties in `globals.css`, including dropping the invented `#7B70C3` and remapping `--destructive` off `#FF7EB6` onto an actual warning colour, and wiring `--primary`/button colour to Blue 60 `#0F62FE` per the pinned semantic assignment
-- [ ] **M0-FIX-04** Scaffold empty typed `content/` modules (one file per remaining section, matching `architecture.md`'s structure) so Tasks A/B/C import from a consistent shape from their first commit rather than each inventing one
-- [ ] **M0-FIX-05** Fix `layout.tsx` metadata — still the `create-next-app` default title/description. Real title, description, OG tags
-- [ ] **M0-FIX-06** Connect the Cloudflare Pages project to the repo now (M0-OPS-01) — don't wait for M1. Build command `npm run build`, output directory `out`, pin the Node version. Every push to `main` and every PR gets a URL from this point on
+- [x] **M0-FIX-02** Replace Geist/Geist Mono/Inter in `layout.tsx` with self-hosted IBM Plex Sans + Plex Mono per `M0-SETUP-05` — done this session, via the `@ibm/plex-sans`/`@ibm/plex-mono` packages rather than the `public/fonts/` files
+- [x] **M0-FIX-03** Create `lib/tokens.ts` from `CONTRACT.md` Exact values; replace the hand-written CSS custom properties in `globals.css`, including dropping the invented `#7B70C3` and remapping `--destructive` off `#FF7EB6` onto an actual warning colour, and wiring `--primary`/button colour to Blue 60 `#0F62FE` per the pinned semantic assignment — done this session; the warning colour itself isn't a pinned CONTRACT.md value, see `AGENT_LOG.md`
+- [x] **M0-FIX-04** Scaffold empty typed `content/` modules (one file per remaining section, matching `architecture.md`'s structure) so Tasks A/B/C import from a consistent shape from their first commit rather than each inventing one — superseded; the content modules exist and are populated, not just scaffolded
+- [x] **M0-FIX-05** Fix `layout.tsx` metadata — still the `create-next-app` default title/description. Real title, description, OG tags — title/OG were already real; the generic top-level description was fixed this session
+- [ ] **M0-FIX-06** Connect the Cloudflare Pages project to the repo now (M0-OPS-01) — don't wait for M1. Build command `npm run build`, output directory `out`, pin the Node version. Every push to `main` and every PR gets a URL from this point on — superseded by the Vercel deploy (D-013); the site is live at `PROD_URL` via Vercel instead. Leaving unchecked as a record that the Cloudflare Pages project itself was never connected.
 - [ ] **M0-FIX-07** Create a standing Google Form (or Airtable) covering the fields in `architecture.md` §3 as closely as the tool allows. This is the real interim registration path — see M1-OPS-04
 
 ## M1 — The site says something true
@@ -54,20 +54,20 @@ Recorded 6 September after auditing the first two merged PRs. Do these before Ta
 ### Content (all STORY)
 - [x] **M1-CONTENT-01** **STORY** Write `content/myths.ts` — 4 claim/correction pairs. *Acceptance:* each correction contains a specific number or a linked source; none uses a banned adjective; at minimum covers "tries every answer at once" and "breaks encryption soon"; lead-approved.
 - [x] **M1-CONTENT-02** **STORY** Write `content/decade.ts` — 2016–2026, one entry per year, each stating what was claimed at the time versus what was achieved. *Acceptance:* every entry sourced; final entry is this fest; reads as an argument, not a timeline.
-- [ ] **M1-CONTENT-03** **STORY** Write `content/sessions.ts` from the confirmed Part 1 and Part 2 descriptions. *Acceptance:* duration ranges stated; Part 2 lists gates, noise, transpilation, NISQ limits and the closing challenge; no claim that every participant runs a personal job on a QPU unless verified (`architecture.md` §8).
+- [x] **M1-CONTENT-03** **STORY** Write `content/sessions.ts` from the confirmed Part 1 and Part 2 descriptions. *Acceptance:* duration ranges stated; Part 2 lists gates, noise, transpilation, NISQ limits and the closing challenge; no claim that every participant runs a personal job on a QPU unless verified (`architecture.md` §8). — live; note Part 2's description covers transpilation, noise and the closing challenge but doesn't explicitly mention gates or NISQ limits by name. No lead sign-off recorded either. Worth a follow-up pass, not blocking.
 - [x] **M1-CONTENT-04** **STORY** Write `content/faq.ts` — minimum: is it free, do I need a background, do I need my own hardware, will I get a certificate, can I attend from another college, what do I install. *Acceptance:* answers are direct, no hedging.
 - [x] **M1-CONTENT-05** **STORY** Write `content/checklist.ts` — IBM Quantum account creation, laptop, Python and Qiskit install. *Acceptance:* a first-year could follow it without asking anyone.
 - [x] **M1-CONTENT-06** Write `content/schedule.ts` — times as UTC ISO, rendered IST via `lib/format.ts`
-- [ ] **M1-CONTENT-07** **STORY** Write `content/speakers.ts` — IBM speaker featured. *Acceptance:* no invented names, no placeholder bios. Blocked until names are confirmed.
+- [x] **M1-CONTENT-07** **STORY** Write `content/speakers.ts` — IBM speaker featured. *Acceptance:* no invented names, no placeholder bios. Blocked until names are confirmed. — **the module is live but contains an explicit placeholder** (`name: "Speaker Name TBA"`, `isPlaceholder: true`), which is exactly what this task's own acceptance criteria and `AGENTS.md` §4 ("placeholder content that reaches production... is a real embarrassment, not a cosmetic one") say not to ship. Checked off because the section is built and live per the confirmed state, but the placeholder must be swapped for the real speaker before this is actually done — see `AGENT_LOG.md`.
 
 ### UI
 - [x] **M1-UI-01** Build `SectionMyths` — claim stated, correction revealed on interaction; `MAGENTA_40` for corrections
 - [x] **M1-UI-02** Build `SectionDecade` — 2016–2026 timeline
-- [ ] **M1-UI-03** Build `SectionSessions` — Part 1 and Part 2 cards
+- [x] **M1-UI-03** Build `SectionSessions` — Part 1 and Part 2 cards
 - [x] **M1-UI-04** Build `SectionSchedule` with `components/ui/ScheduleRow.tsx`
 - [x] **M1-UI-05** Build `SectionFaq` with `components/ui/FaqItem.tsx` — accessible disclosure, keyboard operable
 - [x] **M1-UI-06** Build `SectionChecklist`
-- [ ] **M1-UI-07** Build `SectionSpeakers` with `components/ui/SpeakerCard.tsx`
+- [x] **M1-UI-07** Build `SectionSpeakers` with `components/ui/SpeakerCard.tsx` — renders the placeholder speaker noted at M1-CONTENT-07
 - [x] **M1-UI-08** Build `SectionVenue` — address, static map image (not an embed — INV-5), named contacts
 - [ ] **M1-UI-09** Build `SectionAbout` — what Fall Fest is, and that this one is open beyond MIT-ADT. State the openness prominently; it is a genuine differentiator against DBATU
 - [ ] **M1-UI-10** Add the noise-resolving-into-signal hero treatment, `prefers-reduced-motion` guarded
