@@ -2,9 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import * as z from "zod";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+
+import { registrationSchema, type RegistrationInput } from "@/lib/registration-schema";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,16 +31,10 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
-const formSchema = z.object({
-    name: z.string().min(2, "Full name must be at least 2 characters"),
-    email: z.email("Please enter a valid email"),
-    phone: z.string().min(10, "Please enter a valid phone number"),
-    college: z.string().min(2, "College name is required"),
-    year: z.string().min(1, "Year of study is required"),
-    session: z.string().min(1, "Please select a session"),
-});
-
-type FormData = z.infer<typeof formSchema>;
+// Validation rules live in lib/registration-schema.ts and are shared with
+// app/api/register/route.ts — don't redefine them here, that's how the two
+// quietly drift apart.
+type FormData = RegistrationInput;
 
 // Adjust these to match the actual year and session options for your event.
 const YEAR_OPTIONS = ["1st Year", "2nd Year", "3rd Year", "4th Year", "Other"];
@@ -54,9 +49,10 @@ const FORM_ID = "registration-form";
 export default function RegistrationForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
+    const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
 
     const form = useForm<FormData>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(registrationSchema),
         defaultValues: {
             name: "",
             email: "",
@@ -70,10 +66,28 @@ export default function RegistrationForm() {
     const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
         setSubmitError(null);
+        setSubmitSuccess(null);
         try {
-            console.log("Form Submitted:", data);
-            // Add your API submission logic here
-            await fetch("/api/register", { method: "POST", body: JSON.stringify(data) });
+            const res = await fetch("/api/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+            const body = await res.json();
+
+            // fetch() only rejects on a network failure — a 400/503 response still
+            // resolves normally, so this check is the only thing standing between a
+            // genuinely failed registration and a user who thinks it succeeded.
+            if (!res.ok || body.ok === false) {
+                setSubmitError(body.message ?? "Something went wrong. Please try again.");
+                return;
+            }
+
+            setSubmitSuccess(
+                body.duplicate
+                    ? "You're already registered for Qiskit Fall Fest 2026 — no need to submit again."
+                    : "You're registered! We'll be in touch closer to the event."
+            );
             form.reset();
         } catch (err) {
             console.error(err);
@@ -261,6 +275,11 @@ export default function RegistrationForm() {
 
                             {submitError && (
                                 <p className="text-sm text-destructive">{submitError}</p>
+                            )}
+                            {submitSuccess && (
+                                <p className="text-sm" style={{ color: "var(--accent-correction)" }}>
+                                    {submitSuccess}
+                                </p>
                             )}
                         </FieldGroup>
                     </form>
